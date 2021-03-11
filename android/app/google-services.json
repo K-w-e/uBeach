@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "531744970895",
+    "project_id": "ubeach-7baf5",
+    "storage_bucket": "ubeach-7baf5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531744970895:android:c260dbde57c0f45a7df8fa",
+        "android_client_info": {
+          "package_name": "com.app.ubeach"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531744970895-fotb08rm9i79o7b6ra4p48e5d2hcboe2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDcDi1WIxlWO8qxoqHxaVPoiuX5X1K1Sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531744970895-fotb08rm9i79o7b6ra4p48e5d2hcboe2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

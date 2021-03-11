@@ -8,6 +8,7 @@ import '../Object/Cart.dart';
 import '../Object/Chalet.dart';
 import '../Object/Global.dart';
 import '../Object/Session.dart';
+import 'OrderComplete.dart';
 
 class CartPage extends StatefulWidget {
   Chalet chalet;
@@ -84,7 +85,7 @@ class _CartPageState extends State<CartPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Text(
-                      "Conferma ordine ~ ${tot}\$",
+                      "Conferma ordine",
                       style: TextStyle(color: Colors.white),
                     )
                   ],
@@ -109,7 +110,8 @@ class _CartPageState extends State<CartPage> {
     }
 
     var idToken;
-    if (Global.fbLogin == false) Session().session.getIdToken().getJwtToken();
+    if (Global.fbLogin == false)
+      idToken = Session().session.getIdToken().getJwtToken();
 
     await Global.credentials.getAwsCredentials(idToken);
     const endpoint =
@@ -128,17 +130,23 @@ class _CartPageState extends State<CartPage> {
           'email': email,
           'cart': cart,
           'tot': tot.toString() + "€",
-          'chalet': widget.chalet.name,
-          'id_chalet': widget.chalet.id
+          'id_chalet': widget.chalet.id,
+          if (Global.fbLogin == true) 'facebook': Global.fbProfile['name']
         }));
 
     http.Response response;
+
     try {
-      response = await http.post(
-        signedRequest.url,
-        headers: signedRequest.headers,
-        body: signedRequest.body,
-      );
+      response = await http
+          .post(
+            signedRequest.url,
+            headers: signedRequest.headers,
+            body: signedRequest.body,
+          )
+          .then((value) => Navigator.push(
+              context,
+              new MaterialPageRoute(
+                  builder: (BuildContext context) => OrderComplete())));
     } catch (e) {
       print(e);
     }

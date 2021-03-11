@@ -69,11 +69,10 @@ class EditAccount extends StatelessWidget {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      Text(
-                          "Hai effettuato il login con Facebook!\nNon puoi modificare i dati del tuo account!\n"),
+                      Text("Hai effettuato il login con Facebook!\n"),
                       Text(Global.fbProfile['name']),
                       Text(Global.fbProfile['email']),
-                      Text(Global.fbProfile['id']),
+                      //Text(Global.fbProfile['id']),
                       Image.network(
                           "https://graph.facebook.com/${Global.fbProfile['id']}/picture?type=normal&access_token=${Global.fbAccessToken}"),
                     ],

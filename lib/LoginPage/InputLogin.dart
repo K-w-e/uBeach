@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 import '../SignUpPage/SignUpPage.dart';
 import '../Object/Global.dart';
 import '../Home/Home.dart';
-//import '../Home2.dart';
 
 class InputLogin extends StatefulWidget {
   final customFunction;
@@ -102,7 +101,8 @@ class _InputLoginState extends State<InputLogin> {
 
   void fb() async {
     final facebookLogin = FacebookLogin();
-    final result = await facebookLogin.logInWithReadPermissions(['email']);
+    final result = await facebookLogin.logIn(['email']);
+    //final result = await facebookLogin.logInWithReadPermissions(['email']);
     Global.fbAccessToken = result.accessToken.token;
 
     await Global.credentials

@@ -18,9 +18,7 @@ class GetOrders extends StatelessWidget {
             itemBuilder: (context, index) {
               return Card(
                   child: ExpansionTile(
-                title: Text(
-                  orders[index].title,
-                ),
+                title: Text(orders[index].title + " - " + orders[index].chalet),
                 expandedAlignment: Alignment.bottomLeft,
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 childrenPadding: EdgeInsets.all(15),

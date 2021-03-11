@@ -90,10 +90,10 @@ class _PublicDrawerState extends State<PublicDrawer> {
         headers: new Map<String, String>.from(
             {'Content-Type': 'application/json; charset=utf-8'}),
         body: new Map<String, dynamic>.from({
-          'name': 'Chalet Nuovo',
+          'name': 'Chalet Marco',
           'description': 'Nuova descrizione di prova',
           'location': 'Milano, Via brecce 126',
-          'image': 'https://ubeach.s3.eu-central-1.amazonaws.com/3.jpg',
+          'image': '',
         }));
 
     http.Response response;
@@ -109,10 +109,45 @@ class _PublicDrawerState extends State<PublicDrawer> {
   }
 
   void logout() async {
+    var idToken;
+    if (Global.fbLogin == false)
+      idToken = Session().session.getIdToken().getJwtToken();
+
+    await Global.credentials.getAwsCredentials(idToken);
+
+    const endpoint =
+        'https://p4yf63qy4g.execute-api.eu-central-1.amazonaws.com/delete_endpoint';
+    final awsSigV4Client = new AwsSigV4Client(Global.credentials.accessKeyId,
+        Global.credentials.secretAccessKey, endpoint,
+        sessionToken: Global.credentials.sessionToken, region: 'eu-central-1');
+
+    final signedRequest = new SigV4Request(awsSigV4Client,
+        method: 'POST',
+        path: '/delete-endpoint',
+        headers: new Map<String, String>.from(
+            {'Content-Type': 'application/json; charset=utf-8'}),
+        body: new Map<String, dynamic>.from({'token': Global.deviceToken}));
+
+    http.Response response;
+    try {
+      response = await http.post(
+        signedRequest.url,
+        headers: signedRequest.headers,
+        body: signedRequest.body,
+      );
+    } catch (e) {
+      print(e);
+    }
+    print(response.body);
     if (Global.fbLogin == false) {
       Global.credentials.resetAwsCredentials();
       Global.cognitoUser.globalSignOut();
-    } else if (Global.fbLogin == true) Global.fbProfile = null;
+    } else if (Global.fbLogin == true) {
+      Global.credentials.resetAwsCredentials();
+      Global.fbProfile = null;
+      Global.fbLogin = false;
+      Global.fbAccessToken = null;
+    }
     Navigator.popUntil(context, ModalRoute.withName('/'));
   }
 

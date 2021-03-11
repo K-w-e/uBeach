@@ -19,4 +19,6 @@ class Global {
 
   static final credentials =
       new CognitoCredentials(Global.identityPoolId, Global.userPool);
+
+  static String deviceToken;
 }

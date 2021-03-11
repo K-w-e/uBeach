@@ -29,6 +29,10 @@ class MenuBuilder extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50.0),
                 child: Image.network(
                   items[index]["image"],
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace stackTrace) {
+                    return Icon(Icons.warning);
+                  },
                   width: 50.0,
                   height: 50.0,
                   fit: BoxFit.fill,
