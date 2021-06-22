@@ -27,7 +27,6 @@ class _InputWrapperState extends State<InputWrapper> {
                 color: Colors.white, borderRadius: BorderRadius.circular(10)),
             child: InputLogin(),
           ),
-          //Button()
         ],
       ),
     );

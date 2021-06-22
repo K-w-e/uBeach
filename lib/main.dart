@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'LoginPage/LoginPage.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: 'Roboto',
+        primaryColor: Colors.cyan[500],
       ),
       home: LoginPage(title: 'uBeach'),
     );
